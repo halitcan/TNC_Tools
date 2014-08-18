@@ -19,13 +19,15 @@ SOURCES += main.cpp\
     heidenhersh.cpp \
     fonttablemodel.cpp \
     heidenhershsimulatedialog.cpp \
-    simulateheidenhershgraphicsview.cpp
+    simulateheidenhershgraphicsview.cpp \
+    heidenlinearmove.cpp
 
 HEADERS  += mainwindow.h \
     heidenhersh.h \
     fonttablemodel.h \
     heidenhershsimulatedialog.h \
-    simulateheidenhershgraphicsview.h
+    simulateheidenhershgraphicsview.h \
+    heidenlinearmove.h
 
 FORMS    += mainwindow.ui \
     heidenhersh.ui \

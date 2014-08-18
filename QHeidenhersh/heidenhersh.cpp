@@ -70,6 +70,9 @@ void Heidenhersh::create_glyphs()
 void Heidenhersh::on_buttGenerate_clicked()
 {
     create_glyphs();
+
+    if( glyphs.size() <= 0 )
+        return;
 }
 
 void Heidenhersh::on_buttSimulate_clicked()
