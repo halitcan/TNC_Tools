@@ -46,7 +46,7 @@ InstrL::~InstrL() { }
 
 std::string InstrL::toString()
 {
-	return 'L' + axis1String() + axis2String() + axis3String() + mFuncString();
+	return 'L' + axis1String() + axis2String() + axis3String() + ' ' + _trc.toString() + mFuncString();
 }
 
 unsigned int InstrL::rowCount()

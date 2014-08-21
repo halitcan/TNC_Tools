@@ -11,6 +11,7 @@
 #include "AbstractInstruction.h"
 #include <memory>
 #include "Axis.h"
+#include "ToolRadiusCompensation.h"
 
 extern "C"
 {
@@ -40,6 +41,7 @@ class InstrL : public AbstractInstruction
 		std::unique_ptr<Axis> _axis2;
 		std::unique_ptr<Axis> _axis3;
 		std::unique_ptr<uint8_t> _m_func;
+		ToolRadiusCompensation _trc;
 
 		std::string axis1String();
 		std::string axis2String();
