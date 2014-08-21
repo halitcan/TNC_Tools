@@ -18,18 +18,21 @@ extern "C"
 namespace TNC150
 {
 
-class InstrBegin : public AbstractInstruction
+class InstrBeginEnd : public AbstractInstruction
 {
 	public:
 		enum class Units { MM, INCH };
-		InstrBegin();
-		InstrBegin( const uint8_t pgmNo );
-		InstrBegin( Units unit );
-		InstrBegin( const uint8_t pgmNo, const Units unit );
-		virtual ~InstrBegin();
+		enum class BeginEnd{ Begin, End };
+		InstrBeginEnd( const BeginEnd be, const uint8_t pgmNo );
+		InstrBeginEnd( const BeginEnd be, const Units unit );
+		InstrBeginEnd( const BeginEnd be, const uint8_t pgmNo, const Units unit );
+		virtual ~InstrBeginEnd();
 		std::string toString();
+		unsigned int rowCount();
+		bool isValid();
 
 	private:
+		BeginEnd _be;
 		uint8_t _pgm_no;
 		Units _unit;
 };

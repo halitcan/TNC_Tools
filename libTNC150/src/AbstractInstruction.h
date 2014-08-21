@@ -8,14 +8,21 @@
 #ifndef INSTRUCTION_H_
 #define INSTRUCTION_H_
 
+#include <string>
+
 namespace TNC150
 {
 
-class Instruction
+class AbstractInstruction
 {
 	public:
-		Instruction();
-		virtual ~Instruction();
+		AbstractInstruction();
+		virtual ~AbstractInstruction();
+		virtual std::string toString() = 0;
+		virtual unsigned int rowCount() = 0;
+		virtual bool isValid() = 0;
+
+	private:
 };
 
 } /* namespace TNC150 */

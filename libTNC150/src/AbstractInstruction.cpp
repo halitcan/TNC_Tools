@@ -5,20 +5,13 @@
  *      Author: john
  */
 
-#include "Instruction.h"
+#include "AbstractInstruction.h"
 
 namespace TNC150
 {
 
-Instruction::Instruction()
-{
-	// TODO Auto-generated constructor stub
+AbstractInstruction::AbstractInstruction() { }
 
-}
-
-Instruction::~Instruction()
-{
-	// TODO Auto-generated destructor stub
-}
+AbstractInstruction::~AbstractInstruction() { }
 
 } /* namespace TNC150 */

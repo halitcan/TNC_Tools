@@ -10,6 +10,7 @@
 
 #include <vector>
 #include "InstrBeginEnd.h"
+#include <memory>
 
 extern "C"
 {
@@ -24,13 +25,17 @@ class Program
 	public:
 		Program();
 		Program( uint8_t pgmNo );
+		Program( uint8_t pgmNo, InstrBeginEnd::Units unit );
 		virtual ~Program();
 		std::string toString();
+		void addInstruction( AbstractInstruction *instr );
+		void addInstruction( std::shared_ptr<AbstractInstruction> instr );
+		void addInstructions( std::vector<std::shared_ptr<AbstractInstruction>> &instr );
 
 	private:
 		uint8_t _pgm_no;
 		InstrBeginEnd::Units _unit;
-		std::vector<AbstractInstruction> _instructions;
+		std::vector<std::shared_ptr<AbstractInstruction>> _instructions;
 };
 
 } /* namespace TNC150 */

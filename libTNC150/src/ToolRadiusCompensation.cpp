@@ -12,13 +12,23 @@ namespace TNC150
 
 ToolRadiusCompensation::ToolRadiusCompensation()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
-ToolRadiusCompensation::~ToolRadiusCompensation()
+ToolRadiusCompensation::ToolRadiusCompensation( Dir dir ) : _dir{ new Dir{ dir } }
 {
-	// TODO Auto-generated destructor stub
+}
+
+ToolRadiusCompensation::~ToolRadiusCompensation() { }
+
+std::string ToolRadiusCompensation::toString()
+{
+	if( _dir == nullptr )
+		return "R";
+
+	if( *_dir == Dir::Plus )
+		return "R+";
+
+	return "R-";
 }
 
 } /* namespace TNC150 */

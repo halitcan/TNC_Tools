@@ -7,6 +7,7 @@
 
 #include "Axis.h"
 #include <sstream>
+#include <iomanip>
 
 namespace TNC150
 {
@@ -23,9 +24,8 @@ Axis::~Axis() { }
 
 std::string Axis::toString()
 {
-	char sign = _value >= 0 ? '+' : '\0';
 	std::stringstream ret;
-	ret << nameString() << sign << _value;
+	ret << nameString() << std::setprecision( 3 ) << std::fixed << std::showpos << _value;
 
 	return ret.str();
 }

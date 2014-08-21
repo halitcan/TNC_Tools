@@ -3,3 +3,9 @@
 ./RemoteSystemsTempFiles
 ./QHeidenhersh/QHeidenhersh.pro.user
 ./lib
+/tnctest/
+/.metadata
+/libHersh/build/
+/libHersh/.project
+/libHersh/.cproject
+/RemoteSystemsTempFiles

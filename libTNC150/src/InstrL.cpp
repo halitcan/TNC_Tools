@@ -46,7 +46,7 @@ InstrL::~InstrL() { }
 
 std::string InstrL::toString()
 {
-	return axis1String() + ' ' + axis2String() + ' ' + axis3String() + ' ' + mFuncString();
+	return 'L' + axis1String() + axis2String() + axis3String() + mFuncString();
 }
 
 unsigned int InstrL::rowCount()
@@ -65,7 +65,7 @@ bool InstrL::isValid()
 std::string InstrL::axis1String()
 {
 	if( _axis1 != nullptr )
-		return _axis1->toString();
+		return ' ' + _axis1->toString();
 
 	return std::string();
 }
@@ -73,7 +73,7 @@ std::string InstrL::axis1String()
 std::string InstrL::axis2String()
 {
 	if( _axis2 != nullptr )
-		return _axis2->toString();
+		return ' ' + _axis2->toString();
 
 	return std::string();
 }
@@ -81,7 +81,7 @@ std::string InstrL::axis2String()
 std::string InstrL::axis3String()
 {
 	if( _axis3 != nullptr )
-		return _axis3->toString();
+		return ' ' + _axis3->toString();
 
 	return std::string();
 }
@@ -89,9 +89,9 @@ std::string InstrL::axis3String()
 std::string InstrL::mFuncString()
 {
 	if( _m_func != nullptr )
-		return std::to_string( *_m_func );
+		return " M" + std::to_string( *_m_func );
 
-	return std::string();
+	return " M";
 }
 
 } /* namespace TNC150 */

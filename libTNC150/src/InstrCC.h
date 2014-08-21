@@ -8,7 +8,8 @@
 #ifndef INSTRCC_H_
 #define INSTRCC_H_
 
-#include "src/AbstractInstruction.h"
+#include "AbstractInstruction.h"
+#include "Axis.h"
 
 namespace TNC150
 {
@@ -16,8 +17,15 @@ namespace TNC150
 class InstrCC : public AbstractInstruction
 {
 	public:
-		InstrCC();
+		InstrCC( Axis first, Axis second );
 		virtual ~InstrCC();
+		std::string toString();
+		unsigned int rowCount();
+		bool isValid();
+
+	private:
+		Axis _axis1;
+		Axis _axis2;
 };
 
 } /* namespace TNC150 */
