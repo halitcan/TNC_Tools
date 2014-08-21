@@ -17,9 +17,9 @@ InstrCC::InstrCC( Axis first, Axis second ) : _axis1{ first }, _axis2{ second }
 
 InstrCC::~InstrCC() { }
 
-std::string InstrCC::toString()
+std::string InstrCC::toString( const uint16_t row )
 {
-	return "CC " + _axis1.toString() + _axis2.toString();
+	return std::to_string( row ) + " CC " + _axis1.toString() + _axis2.toString();
 }
 
 unsigned int InstrCC::rowCount()

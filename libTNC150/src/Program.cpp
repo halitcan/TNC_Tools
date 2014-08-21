@@ -26,26 +26,22 @@ Program::Program( uint8_t pgmNo, InstrBeginEnd::Units unit ) : _pgm_no{ pgmNo },
 std::string Program::toString()
 {
 	std::stringstream ret;
-	unsigned int row = 0;
+	uint16_t row = 0;
 
-	ret << std::to_string( row++ ) << ' '
-		<< InstrBeginEnd{ InstrBeginEnd::BeginEnd::Begin, _pgm_no, _unit }.toString() << '\n';
+	ret << InstrBeginEnd{ InstrBeginEnd::BeginEnd::Begin, _pgm_no, _unit }.toString( row++ ) << '\n';
 
-	for( auto &i : _instructions )
-		ret << std::to_string( row++ ) << ' ' << i->toString() << '\n';
+	for( auto i : _instructions )
+	{
+		ret << i->toString( row ) << '\n';
+		row += i->rowCount();
+	}
 
-	ret << std::to_string( row++ ) << ' '
-		<< InstrBeginEnd{ InstrBeginEnd::BeginEnd::End, _pgm_no, _unit }.toString() << '\n';
+	ret << InstrBeginEnd{ InstrBeginEnd::BeginEnd::End, _pgm_no, _unit }.toString( row ) << '\n';
 
 	return ret.str();
 }
 
 Program::~Program() { }
-
-void Program::addInstruction( AbstractInstruction *instr )
-{
-	_instructions.push_back( std::shared_ptr<AbstractInstruction>( instr ) );
-}
 
 void Program::addInstruction( std::shared_ptr<AbstractInstruction> instr )
 {

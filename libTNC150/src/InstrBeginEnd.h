@@ -10,11 +10,6 @@
 
 #include "AbstractInstruction.h"
 
-extern "C"
-{
-#include <inttypes.h>
-}
-
 namespace TNC150
 {
 
@@ -27,7 +22,7 @@ class InstrBeginEnd : public AbstractInstruction
 		InstrBeginEnd( const BeginEnd be, const Units unit );
 		InstrBeginEnd( const BeginEnd be, const uint8_t pgmNo, const Units unit );
 		virtual ~InstrBeginEnd();
-		std::string toString();
+		std::string toString( const uint16_t row );
 		unsigned int rowCount();
 		bool isValid();
 

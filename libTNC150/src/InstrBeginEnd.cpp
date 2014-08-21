@@ -25,12 +25,12 @@ InstrBeginEnd::InstrBeginEnd( const BeginEnd be, const uint8_t pgmNo, const Unit
 
 InstrBeginEnd::~InstrBeginEnd() { }
 
-std::string InstrBeginEnd::toString()
+std::string InstrBeginEnd::toString( const uint16_t row )
 {
 	std::string be = _be == BeginEnd::Begin ? "BEGIN PGM " : "END PGM ";
 	std::string u = _unit == Units::MM ? "MM" : "INCH";
 	std::stringstream ret;
-	ret << be << std::to_string( _pgm_no ) << ' ' << u;
+	ret << std::to_string( row ) << ' ' << be << std::to_string( _pgm_no ) << ' ' << u;
 
 	return ret.str();
 }

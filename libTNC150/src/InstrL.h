@@ -12,11 +12,8 @@
 #include <memory>
 #include "Axis.h"
 #include "ToolRadiusCompensation.h"
-
-extern "C"
-{
-#include <inttypes.h>
-}
+#include "Feed.h"
+#include "MFunction.h"
 
 namespace TNC150
 {
@@ -32,7 +29,7 @@ class InstrL : public AbstractInstruction
 		InstrL( const Axis axis1, const Axis axis2, const Axis axis3 );
 		InstrL( const Axis axis1, const Axis axis2, const Axis axis3, const uint8_t mFunction );
 		virtual ~InstrL();
-		std::string toString();
+		std::string toString( const uint16_t row );
 		unsigned int rowCount();
 		bool isValid();
 
@@ -40,13 +37,13 @@ class InstrL : public AbstractInstruction
 		std::unique_ptr<Axis> _axis1;
 		std::unique_ptr<Axis> _axis2;
 		std::unique_ptr<Axis> _axis3;
-		std::unique_ptr<uint8_t> _m_func;
+		MFunction _m_func;
 		ToolRadiusCompensation _trc;
+		Feed _feed;
 
 		std::string axis1String();
 		std::string axis2String();
 		std::string axis3String();
-		std::string mFuncString();
 };
 
 } /* namespace TNC150 */

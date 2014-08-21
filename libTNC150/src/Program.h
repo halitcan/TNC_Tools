@@ -28,7 +28,6 @@ class Program
 		Program( uint8_t pgmNo, InstrBeginEnd::Units unit );
 		virtual ~Program();
 		std::string toString();
-		void addInstruction( AbstractInstruction *instr );
 		void addInstruction( std::shared_ptr<AbstractInstruction> instr );
 		void addInstructions( std::vector<std::shared_ptr<AbstractInstruction>> &instr );
 

@@ -10,6 +10,11 @@
 
 #include <string>
 
+extern "C"
+{
+#include <inttypes.h>
+}
+
 namespace TNC150
 {
 
@@ -18,7 +23,7 @@ class AbstractInstruction
 	public:
 		AbstractInstruction();
 		virtual ~AbstractInstruction();
-		virtual std::string toString() = 0;
+		virtual std::string toString( const uint16_t row ) = 0;
 		virtual unsigned int rowCount() = 0;
 		virtual bool isValid() = 0;
 

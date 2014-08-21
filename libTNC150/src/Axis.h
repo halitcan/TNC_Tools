@@ -20,6 +20,7 @@ class Axis
 		enum class UnknownAxisName { };
 		Axis( const Name name, const float value );
 		Axis( const Name name, const float value, const bool incremental );
+		Axis( const Axis &other );
 		virtual ~Axis();
 		std::string toString();
 

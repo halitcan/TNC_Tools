@@ -9,6 +9,8 @@
 #include <sstream>
 #include <iomanip>
 
+#include <iostream>
+
 namespace TNC150
 {
 
@@ -18,6 +20,13 @@ Axis::Axis( const Name name, const float value ) : _name{ name }, _value{ value 
 
 Axis::Axis( const Name name, const float value, const bool incremental ) : _name{ name }, _value{ value }, _inc{ incremental }
 {
+}
+
+Axis::Axis( const Axis &other )
+{
+	_name = other._name;
+	_value = other._value;
+	_inc = other._inc;
 }
 
 Axis::~Axis() { }

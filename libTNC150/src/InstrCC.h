@@ -19,7 +19,7 @@ class InstrCC : public AbstractInstruction
 	public:
 		InstrCC( Axis first, Axis second );
 		virtual ~InstrCC();
-		std::string toString();
+		std::string toString( const uint16_t row );
 		unsigned int rowCount();
 		bool isValid();
 
