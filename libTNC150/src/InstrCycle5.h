@@ -11,6 +11,7 @@
 #include "AbstractInstruction.h"
 #include "Feed.h"
 #include "Direction.h"
+#include "Field.h"
 
 namespace TNC150
 {
@@ -26,10 +27,10 @@ class InstrCycle5 : public AbstractInstruction
 		bool isValid();
 
 	private:
-		float _safe;
-		float _depth;
-		float _w_depth;
-		float _radius;
+		Field<float> _safe;
+		Field<float> _depth;
+		Field<float> _w_depth;
+		Field<float> _radius;
 		Feed _plunge_feed;
 		Feed _work_feed;
 		Direction _dir;

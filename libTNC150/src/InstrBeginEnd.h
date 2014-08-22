@@ -9,6 +9,7 @@
 #define INSTRBEGIN_H_
 
 #include "AbstractInstruction.h"
+#include "Field.h"
 
 namespace TNC150
 {
@@ -28,7 +29,7 @@ class InstrBeginEnd : public AbstractInstruction
 
 	private:
 		BeginEnd _be;
-		uint8_t _pgm_no;
+		Field<uint8_t> _pgm_no;
 		Units _unit;
 };
 

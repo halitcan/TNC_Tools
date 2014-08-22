@@ -11,15 +11,15 @@
 namespace TNC150
 {
 
-InstrBeginEnd::InstrBeginEnd( const BeginEnd be, const uint8_t pgmNo ) : _be{ be }, _pgm_no{ pgmNo }, _unit{ Units::MM }
+InstrBeginEnd::InstrBeginEnd( const BeginEnd be, const uint8_t pgmNo ) : _be{ be }, _pgm_no{ "PGM ", pgmNo }, _unit{ Units::MM }
 {
 }
 
-InstrBeginEnd::InstrBeginEnd( const BeginEnd be, const Units unit ) : _be{ be }, _pgm_no{ 1 }, _unit{ unit }
+InstrBeginEnd::InstrBeginEnd( const BeginEnd be, const Units unit ) : _be{ be }, _pgm_no{ "PGM ", 1 }, _unit{ unit }
 {
 }
 
-InstrBeginEnd::InstrBeginEnd( const BeginEnd be, const uint8_t pgmNo, const Units unit ) : _be{ be }, _pgm_no{ pgmNo }, _unit{ unit }
+InstrBeginEnd::InstrBeginEnd( const BeginEnd be, const uint8_t pgmNo, const Units unit ) : _be{ be }, _pgm_no{ "PGM ", pgmNo }, _unit{ unit }
 {
 }
 
@@ -27,12 +27,10 @@ InstrBeginEnd::~InstrBeginEnd() { }
 
 std::string InstrBeginEnd::toString( const uint16_t row )
 {
-	std::string be = _be == BeginEnd::Begin ? "BEGIN PGM " : "END PGM ";
+	std::string be = _be == BeginEnd::Begin ? "BEGIN " : "END ";
 	std::string u = _unit == Units::MM ? "MM" : "INCH";
-	std::stringstream ret;
-	ret << std::to_string( row ) << ' ' << be << std::to_string( _pgm_no ) << ' ' << u;
 
-	return ret.str();
+	return be + _pgm_no.toString() + ' ' + u;
 }
 
 unsigned int InstrBeginEnd::rowCount()
@@ -42,9 +40,9 @@ unsigned int InstrBeginEnd::rowCount()
 
 bool InstrBeginEnd::isValid()
 {
-	if( _pgm_no < 1 )
+	if( _pgm_no.value() < 1 )
 		return false;
-	else if( _pgm_no > 99 )
+	else if( _pgm_no.value() > 99 )
 		return false;
 	else if( _unit != Units::MM && _unit != Units::INCH )
 		return false;

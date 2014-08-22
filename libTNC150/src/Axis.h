@@ -8,27 +8,27 @@
 #ifndef AXIS_H_
 #define AXIS_H_
 
-#include <string>
+#include "Field.h"
 
 namespace TNC150
 {
 
-class Axis
+class Axis : public Field<float>
 {
 	public:
 		enum class Name{ X, Y, Z, IV };
-		enum class UnknownAxisName { };
 		Axis( const Name name, const float value );
 		Axis( const Name name, const float value, const bool incremental );
 		Axis( const Axis &other );
 		virtual ~Axis();
-		std::string toString();
+		Name name();
+		bool isIncremental();
 
 	private:
+		Axis();
 		Name _name;
-		float _value;
-		std::string nameString();
 		bool _inc;
+		std::string axisName();
 };
 
 } /* namespace TNC150 */

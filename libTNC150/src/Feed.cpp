@@ -10,22 +10,16 @@
 namespace TNC150
 {
 
-Feed::Feed()
+Feed::Feed() : Field<uint16_t>{ "F" }
 {
 }
 
-Feed::Feed( uint16_t value ) : _value{ new uint16_t{ value } }
+Feed::Feed( uint16_t value ) : Field<uint16_t>{ "F" }
 {
+	setValue( value );
 }
 
 Feed::~Feed() { }
 
-std::string Feed::toString()
-{
-	if( _value == nullptr )
-		return "F";
-
-	return 'F' + std::to_string( *_value );
-}
 
 } /* namespace TNC150 */

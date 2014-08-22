@@ -8,22 +8,18 @@
 #ifndef DIRECTION_H_
 #define DIRECTION_H_
 
-#include <string>
+#include "Field.h"
 
 namespace TNC150
 {
 
-class Direction
+class Direction : public Field<char>
 {
 	public:
 		enum class Dir{ Positive, Negative };
 		Direction();
 		Direction( Dir dir );
 		virtual ~Direction();
-		std::string toString();
-
-	private:
-		Dir _dir;
 };
 
 } /* namespace TNC150 */

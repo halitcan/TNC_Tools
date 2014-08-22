@@ -12,25 +12,15 @@
 namespace TNC150
 {
 
-MFunction::MFunction()
+MFunction::MFunction() : Field<uint8_t>{ "M" }
 {
 }
 
-MFunction::MFunction( uint8_t value ) : _value{ new uint8_t{ value } }
+MFunction::MFunction( uint8_t value ) : Field<uint8_t>{ "M" }
 {
+	setValue( value );
 }
 
 MFunction::~MFunction() { }
-
-std::string MFunction::toString()
-{
-	std::stringstream ret;
-	ret << "M";
-
-	if( _value != nullptr )
-		ret << std::setfill( '0' ) << std::setw( 2 ) << *_value;
-
-	return ret.str();
-}
 
 } /* namespace TNC150 */

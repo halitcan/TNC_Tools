@@ -14,48 +14,55 @@
 namespace TNC150
 {
 
-Axis::Axis( const Name name, const float value ) : _name{ name }, _value{ value }, _inc{ false }
+Axis::Axis() : _name{ Name::X }, _inc{ false }
 {
 }
 
-Axis::Axis( const Name name, const float value, const bool incremental ) : _name{ name }, _value{ value }, _inc{ incremental }
+Axis::Axis( const Name name, const float value ) : _name{ name }, _inc{ false }
 {
+	setLabel( axisName() );
+	setValue( value );
 }
 
-Axis::Axis( const Axis &other )
+Axis::Axis( const Name name, const float value, const bool incremental ) : _name{ name }, _inc{ incremental }
 {
-	_name = other._name;
-	_value = other._value;
-	_inc = other._inc;
+	setLabel( axisName() );
+	setValue( value );
+}
+
+Axis::Axis( const Axis &other ) : Field{ other }, _name{ other._name }, _inc{ other._inc }
+{
 }
 
 Axis::~Axis() { }
 
-std::string Axis::toString()
-{
-	std::stringstream ret;
-	ret << nameString() << std::setprecision( 3 ) << std::fixed << std::showpos << _value;
 
-	return ret.str();
-}
-
-std::string Axis::nameString()
+std::string Axis::axisName()
 {
-	std::string i = _inc ? "I" : std::string();
+	std::string ret;
+	if( _inc )
+		ret = 'I';
+
 	switch( _name )
 	{
 		case Name::X:
-			return i + "X";
+			ret.push_back( 'X' );
+			break;
 		case Name::Y:
-			return i + "Y";
+			ret.push_back( 'Y' );
+			break;
+		case Name::Z:
+			ret.push_back( 'Z' );
+			break;
 		case Name::IV:
-			return i + "IV";
+			ret.push_back( 'I' );
+			ret.push_back( 'V' );
+			break;
 		default:
-			throw UnknownAxisName();
 			break;
 	}
 
-	return std::string();
+	return ret;
 }
 
 } /* namespace TNC150 */

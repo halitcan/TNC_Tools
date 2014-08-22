@@ -8,26 +8,17 @@
 #ifndef MFUNCTION_H_
 #define MFUNCTION_H_
 
-#include <string>
-#include <memory>
-extern "C"
-{
-#include <inttypes.h>
-}
+#include "Field.h"
 
 namespace TNC150
 {
 
-class MFunction
+class MFunction : public Field<uint8_t>
 {
 	public:
 		MFunction();
 		MFunction( uint8_t value );
 		virtual ~MFunction();
-		std::string toString();
-
-	private:
-		std::unique_ptr<uint8_t> _value;
 };
 
 } /* namespace TNC150 */

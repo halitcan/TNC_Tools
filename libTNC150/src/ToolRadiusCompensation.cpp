@@ -10,25 +10,18 @@
 namespace TNC150
 {
 
-ToolRadiusCompensation::ToolRadiusCompensation()
+ToolRadiusCompensation::ToolRadiusCompensation() : Field<char>{ "R" }
 {
 }
 
-ToolRadiusCompensation::ToolRadiusCompensation( Dir dir ) : _dir{ new Dir{ dir } }
+ToolRadiusCompensation::ToolRadiusCompensation( Dir dir ) : Field<char>{ "R" }
 {
+	if( dir == Dir::Positive )
+		setValue( '+' );
+	else
+		setValue( '-' );
 }
 
 ToolRadiusCompensation::~ToolRadiusCompensation() { }
-
-std::string ToolRadiusCompensation::toString()
-{
-	if( _dir == nullptr )
-		return "R";
-
-	if( *_dir == Dir::Plus )
-		return "R+";
-
-	return "R-";
-}
 
 } /* namespace TNC150 */

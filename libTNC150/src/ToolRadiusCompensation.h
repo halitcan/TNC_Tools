@@ -8,23 +8,18 @@
 #ifndef TOOLRADIUSCOMPENSATION_H_
 #define TOOLRADIUSCOMPENSATION_H_
 
-#include <memory>
-#include <string>
+#include "Field.h"
 
 namespace TNC150
 {
 
-class ToolRadiusCompensation
+class ToolRadiusCompensation : public Field<char>
 {
 	public:
-		enum class Dir{ Plus, Minus };
+		enum class Dir{ Positive, Negative };
 		ToolRadiusCompensation();
 		ToolRadiusCompensation( Dir dir );
 		virtual ~ToolRadiusCompensation();
-		std::string toString();
-
-	private:
-		std::unique_ptr<Dir> _dir;
 };
 
 } /* namespace TNC150 */

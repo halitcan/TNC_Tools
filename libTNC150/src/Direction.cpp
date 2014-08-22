@@ -10,22 +10,18 @@
 namespace TNC150
 {
 
-Direction::Direction() : _dir{ Dir::Positive }
+Direction::Direction() : Field<char>{ "DR" }
 {
 }
 
-Direction::Direction( Dir dir) : _dir{ dir }
+Direction::Direction( Dir dir) : Field<char>{ "DR" }
 {
+	if( dir == Dir::Positive )
+		setValue( '+' );
+	else
+		setValue( '-' );
 }
 
 Direction::~Direction() { }
-
-std::string Direction::toString()
-{
-	if( _dir == Dir::Positive )
-		return "DR+";
-
-	return "DR-";
-}
 
 } /* namespace TNC150 */

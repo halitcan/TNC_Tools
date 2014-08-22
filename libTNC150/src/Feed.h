@@ -8,27 +8,17 @@
 #ifndef FEED_H_
 #define FEED_H_
 
-#include <memory>
-#include <string>
-
-extern "C"
-{
-#include <inttypes.h>
-}
+#include "Field.h"
 
 namespace TNC150
 {
 
-class Feed
+class Feed : public Field<uint16_t>
 {
 	public:
 		Feed();
 		Feed( uint16_t value );
 		virtual ~Feed();
-		std::string toString();
-
-	private:
-		std::unique_ptr<uint16_t> _value;
 };
 
 } /* namespace TNC150 */
