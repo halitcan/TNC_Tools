@@ -34,6 +34,10 @@ Axis::Axis( const Axis &other ) : Field{ other }, _name{ other._name }, _inc{ ot
 {
 }
 
+Axis::Axis( const Name name, const uint8_t q, const Dir qdir ) : Field{ q, qdir }, _name{ name }
+{
+	setLabel( axisName() );
+}
 Axis::~Axis() { }
 
 

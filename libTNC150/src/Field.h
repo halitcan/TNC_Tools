@@ -18,11 +18,14 @@ template<class F>
 class Field
 {
 	public:
+		enum class Dir{ Positive, Negative };
 		Field();
 		Field( std::string label );
 		Field( std::string label, F value );
 		Field( const Field &other );
-		virtual ~Field();
+		Field( std::string label, uint8_t q, Dir dir );
+		Field( uint8_t q, Dir dir );
+		~Field();
 		std::string toString();
 		void setValue( const F value );
 		void setLabel( const std::string label );
@@ -32,6 +35,9 @@ class Field
 	private:
 		std::string _label;
 		std::unique_ptr<F> _value;
+		std::unique_ptr<uint8_t> _q;
+		Dir _qdir;
+		std::string qString();
 };
 
 } /* namespace TNC150 */

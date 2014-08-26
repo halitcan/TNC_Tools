@@ -19,7 +19,7 @@ class InstrCycleCall : public AbstractInstruction
 	public:
 		InstrCycleCall();
 		InstrCycleCall( uint8_t mFunc );
-		virtual ~InstrCycleCall();
+		~InstrCycleCall();
 		std::string toString( uint16_t row );
 		unsigned int rowCount();
 		bool isValid();

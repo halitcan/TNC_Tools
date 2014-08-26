@@ -16,10 +16,10 @@ namespace TNC150
 class ToolRadiusCompensation : public Field<char>
 {
 	public:
-		enum class Dir{ Positive, Negative };
+		enum Compensation{ Right, Left };
 		ToolRadiusCompensation();
-		ToolRadiusCompensation( Dir dir );
-		virtual ~ToolRadiusCompensation();
+		ToolRadiusCompensation( Compensation comp );
+		~ToolRadiusCompensation();
 };
 
 } /* namespace TNC150 */

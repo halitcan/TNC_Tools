@@ -31,7 +31,7 @@ class Font
 		virtual ~Font();
 		void load( std::string filename );
 		Glyph getGlyph( wchar_t g, FontMap &map );
-		std::vector<Glyph> getGlyphs( std::wstring s, FontMap &m );
+		Glyph::GlyphVector getGlyphs( std::wstring s, FontMap &m );
 
 	private:
 		std::vector<Glyph> glyphs;

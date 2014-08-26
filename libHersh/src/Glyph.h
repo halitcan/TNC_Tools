@@ -11,11 +11,14 @@
 #include <vector>
 #include "Vertex.h"
 
+
 namespace hersh
 {
 class Glyph
 {
 	public:
+		typedef std::vector<hersh::Glyph> GlyphVector;
+
 		Glyph();
 		virtual ~Glyph();
 		void setGlyphNum( const int value );
@@ -38,6 +41,7 @@ class Glyph
 		std::vector<std::vector<Vertex>> paths;
 
 };
+
 
 } //namespace Hersh
 #endif /* GLYPH_H_ */

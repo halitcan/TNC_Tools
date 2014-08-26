@@ -22,7 +22,7 @@ class InstrBeginEnd : public AbstractInstruction
 		InstrBeginEnd( const BeginEnd be, const uint8_t pgmNo );
 		InstrBeginEnd( const BeginEnd be, const Units unit );
 		InstrBeginEnd( const BeginEnd be, const uint8_t pgmNo, const Units unit );
-		virtual ~InstrBeginEnd();
+		~InstrBeginEnd();
 		std::string toString( const uint16_t row );
 		unsigned int rowCount();
 		bool isValid();

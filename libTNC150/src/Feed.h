@@ -18,7 +18,7 @@ class Feed : public Field<uint16_t>
 	public:
 		Feed();
 		Feed( uint16_t value );
-		virtual ~Feed();
+		~Feed();
 };
 
 } /* namespace TNC150 */

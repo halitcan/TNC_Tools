@@ -42,6 +42,16 @@ InstrL::InstrL( const Axis axis1, const Axis axis2, const Axis axis3, const uint
 {
 }
 
+InstrL::InstrL( const InstrL &other ) : _m_func{ other._m_func }, _trc{ other._trc }, _feed{ other._feed }
+{
+	if( other._axis1 != nullptr )
+		_axis1 = std::unique_ptr<Axis>{ new Axis{ *other._axis1 } };
+	if( other._axis2 != nullptr )
+		_axis2 = std::unique_ptr<Axis>{ new Axis{ *other._axis2 } };
+	if( other._axis3 != nullptr )
+		_axis3 = std::unique_ptr<Axis>{ new Axis{ *other._axis3 } };
+}
+
 InstrL::~InstrL() { }
 
 std::string InstrL::toString( const uint16_t row )

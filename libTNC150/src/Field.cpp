@@ -13,25 +13,37 @@ namespace TNC150
 {
 
 template<class F>
-Field<F>::Field()
+Field<F>::Field() : _qdir{ Dir::Positive }
 {
 }
 
 template<class F>
-Field<F>::Field( std::string label ) : _label{ label }
+Field<F>::Field( std::string label ) : _label{ label }, _qdir{ Dir::Positive }
 {
 }
 
 template<class F>
-Field<F>::Field( std::string label, F value ) : _label{ label }, _value{ new F{ value } }
+Field<F>::Field( std::string label, F value ) : _label{ label }, _value{ new F{ value } }, _qdir{ Dir::Positive }
 {
 }
 
 template<class F>
-Field<F>::Field( const Field &other ) : _label{ other._label }
+Field<F>::Field( const Field &other ) : _label{ other._label }, _qdir{ other._qdir }
 {
 	if( other._value != nullptr )
-		_value = std::unique_ptr<F>( new F{ *other._value } );
+		_value = std::unique_ptr<F>{ new F{ *other._value } };
+	if( other._q != nullptr )
+		_q = std::unique_ptr<uint8_t>{ new uint8_t{ *other._q } };
+}
+
+template<class F>
+Field<F>::Field( std::string label, uint8_t q, Dir dir ) : _label{ label }, _q{ new uint8_t{ q } }, _qdir{ dir }
+{
+}
+
+template<class F>
+Field<F>::Field( uint8_t q, Dir dir ) : _q{ new uint8_t{ q } }, _qdir{ dir }
+{
 }
 
 template<class F>
@@ -42,6 +54,8 @@ Field<F>::~Field()
 template<>
 std::string Field<uint8_t>::toString()
 {
+	if( _q != nullptr )
+		return qString();
 	if( _value != nullptr )
 		return _label + std::to_string( *_value );
 
@@ -51,6 +65,8 @@ std::string Field<uint8_t>::toString()
 template<>
 std::string Field<uint16_t>::toString()
 {
+	if( _q != nullptr )
+		return qString();
 	if( _value != nullptr )
 		return _label + std::to_string( *_value );
 
@@ -60,6 +76,8 @@ std::string Field<uint16_t>::toString()
 template<>
 std::string Field<float>::toString()
 {
+	if( _q != nullptr )
+		return qString();
 	std::stringstream ret;
 //	ret << _label;
 
@@ -72,6 +90,8 @@ std::string Field<float>::toString()
 template <>
 std::string Field<std::string>::toString()
 {
+	if( _q != nullptr )
+		return qString();
 	if( _value != nullptr )
 		return _label + *_value;
 
@@ -81,6 +101,8 @@ std::string Field<std::string>::toString()
 template <>
 std::string Field<char>::toString()
 {
+	if( _q != nullptr )
+		return qString();
 	if( _value != nullptr )
 		return _label + *_value;
 
@@ -112,6 +134,16 @@ template<class F>
 std::string Field<F>::label()
 {
 	return _label;
+}
+
+template<class F>
+std::string Field<F>::qString()
+{
+	if( _q == nullptr )
+		return std::string();
+
+	std::string s = _qdir == Dir::Positive ? "+Q" : "-Q";
+	return s + std::to_string( *_q );
 }
 
 template class Field<uint8_t>;

@@ -14,12 +14,12 @@ ToolRadiusCompensation::ToolRadiusCompensation() : Field<char>{ "R" }
 {
 }
 
-ToolRadiusCompensation::ToolRadiusCompensation( Dir dir ) : Field<char>{ "R" }
+ToolRadiusCompensation::ToolRadiusCompensation( Compensation comp ) : Field<char>{ "R" }
 {
-	if( dir == Dir::Positive )
-		setValue( '+' );
+	if( comp == Compensation::Right )
+		setValue( 'R' );
 	else
-		setValue( '-' );
+		setValue( 'L' );
 }
 
 ToolRadiusCompensation::~ToolRadiusCompensation() { }

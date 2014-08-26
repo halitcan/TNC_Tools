@@ -28,7 +28,8 @@ class InstrL : public AbstractInstruction
 		InstrL( const Axis axis1, const Axis axis2, const uint8_t mFunction );
 		InstrL( const Axis axis1, const Axis axis2, const Axis axis3 );
 		InstrL( const Axis axis1, const Axis axis2, const Axis axis3, const uint8_t mFunction );
-		virtual ~InstrL();
+		InstrL( const InstrL &other );
+		~InstrL();
 		std::string toString( const uint16_t row );
 		unsigned int rowCount();
 		bool isValid();

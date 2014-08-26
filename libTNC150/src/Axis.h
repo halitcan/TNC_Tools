@@ -19,8 +19,9 @@ class Axis : public Field<float>
 		enum class Name{ X, Y, Z, IV };
 		Axis( const Name name, const float value );
 		Axis( const Name name, const float value, const bool incremental );
+		Axis( const Name name, const uint8_t q, const Dir qdir );
 		Axis( const Axis &other );
-		virtual ~Axis();
+		~Axis();
 		Name name();
 		bool isIncremental();
 

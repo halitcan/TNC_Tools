@@ -18,7 +18,7 @@ class MFunction : public Field<uint8_t>
 	public:
 		MFunction();
 		MFunction( uint8_t value );
-		virtual ~MFunction();
+		~MFunction();
 };
 
 } /* namespace TNC150 */

@@ -16,10 +16,9 @@ namespace TNC150
 class Direction : public Field<char>
 {
 	public:
-		enum class Dir{ Positive, Negative };
 		Direction();
 		Direction( Dir dir );
-		virtual ~Direction();
+		~Direction();
 };
 
 } /* namespace TNC150 */
