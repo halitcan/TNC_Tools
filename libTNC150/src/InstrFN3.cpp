@@ -5,36 +5,36 @@
  *      Author: john
  */
 
-#include "InstrFN1.h"
+#include "InstrFN3.h"
 
 namespace TNC150
 {
 
-InstrFN1::InstrFN1( uint8_t q, float lvalue, float rvalue )
+InstrFN3::InstrFN3( uint8_t q, float lvalue, float rvalue )
 		 : _q{ "Q", q }, _lvalue{ new Field<float>{ "", lvalue } }, _rvalue{ new Field<float>{ "", rvalue } }
 {
 }
 
-InstrFN1::InstrFN1( uint8_t q, uint8_t lQvalue, uint8_t rQvalue )
+InstrFN3::InstrFN3( uint8_t q, uint8_t lQvalue, uint8_t rQvalue )
 		 : _q{ "Q", q }, _qlvalue{ new Field<uint8_t>{ "Q", lQvalue } }, _qrvalue{ new Field<uint8_t>{ "Q", rQvalue } }
 {
 }
 
-InstrFN1::InstrFN1( uint8_t q, float lvalue, uint8_t rQvalue )
+InstrFN3::InstrFN3( uint8_t q, float lvalue, uint8_t rQvalue )
 		 : _q{ "Q", q }, _lvalue{ new Field<float>{ "", lvalue } }, _qrvalue{ new Field<uint8_t>{ "Q", rQvalue } }
 {
 }
 
-InstrFN1::InstrFN1( uint8_t q, uint8_t lQvalue, float rvalue )
+InstrFN3::InstrFN3( uint8_t q, uint8_t lQvalue, float rvalue )
 		 : _q{ "Q", q }, _qlvalue{ new Field<uint8_t>{ "Q", lQvalue } }, _rvalue{ new Field<float>{ "", rvalue } }
 {
 }
 
-InstrFN1::~InstrFN1()
+InstrFN3::~InstrFN3()
 {
 }
 
-std::string InstrFN1::toString( uint16_t row )
+std::string InstrFN3::toString( uint16_t row )
 {
 	std::string lval, rval;
 
@@ -47,7 +47,7 @@ std::string InstrFN1::toString( uint16_t row )
 	else if( _qrvalue != nullptr )
 		rval = _qrvalue->toString();
 
-	return "FN 2 : " + _q.toString() + " = " + lval + " + " + rval;
+	return "FN 3 : " + _q.toString() + " = " + lval + " * " + rval;
 }
 
 } /* namespace TNC150 */
