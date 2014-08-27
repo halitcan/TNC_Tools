@@ -14,7 +14,7 @@ Direction::Direction() : Field<char>{ "DR" }
 {
 }
 
-Direction::Direction( Dir dir) : Field<char>{ "DR" }
+Direction::Direction( const Dir dir) : Field<char>{ "DR" }
 {
 	if( dir == Dir::Positive )
 		setValue( '+' );

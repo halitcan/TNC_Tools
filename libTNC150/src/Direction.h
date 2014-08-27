@@ -17,7 +17,7 @@ class Direction : public Field<char>
 {
 	public:
 		Direction();
-		Direction( Dir dir );
+		Direction( const Dir dir );
 		~Direction();
 };
 

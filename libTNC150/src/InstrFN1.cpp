@@ -15,18 +15,18 @@ InstrFN1::InstrFN1( uint8_t q, float lvalue, float rvalue )
 {
 }
 
-InstrFN1::InstrFN1( uint8_t q, uint8_t lQvalue, uint8_t rQvalue )
-		 : _q{ "Q", q }, _qlvalue{ new Field<uint8_t>{ "Q", lQvalue } }, _qrvalue{ new Field<uint8_t>{ "Q", rQvalue } }
+InstrFN1::InstrFN1( uint8_t q, uint8_t lQvalue, Field<float>::Dir lDir, uint8_t rQvalue, Field<float>::Dir rDir )
+		 : _q{ "Q", q }, _lvalue{ new Field<float>{ "", lQvalue, lDir } }, _rvalue{ new Field<float>{ "Q", rQvalue, rDir } }
 {
 }
 
-InstrFN1::InstrFN1( uint8_t q, float lvalue, uint8_t rQvalue )
-		 : _q{ "Q", q }, _lvalue{ new Field<float>{ "", lvalue } }, _qrvalue{ new Field<uint8_t>{ "Q", rQvalue } }
+InstrFN1::InstrFN1( uint8_t q, float lvalue, uint8_t rQvalue, Field<float>::Dir rDir )
+		 : _q{ "Q", q }, _lvalue{ new Field<float>{ "", lvalue } }, _rvalue{ new Field<float>{ "Q", rQvalue, rDir } }
 {
 }
 
-InstrFN1::InstrFN1( uint8_t q, uint8_t lQvalue, float rvalue )
-		 : _q{ "Q", q }, _qlvalue{ new Field<uint8_t>{ "Q", lQvalue } }, _rvalue{ new Field<float>{ "", rvalue } }
+InstrFN1::InstrFN1( uint8_t q, uint8_t lQvalue, Field<float>::Dir lDir, float rvalue )
+		 : _q{ "Q", q }, _lvalue{ new Field<float>{ "Q", lQvalue, lDir } }, _rvalue{ new Field<float>{ "", rvalue } }
 {
 }
 
@@ -36,18 +36,7 @@ InstrFN1::~InstrFN1()
 
 std::string InstrFN1::toString( uint16_t row )
 {
-	std::string lval, rval;
-
-	if( _lvalue != nullptr )
-		lval = _lvalue->toString();
-	else if( _qlvalue != nullptr )
-		lval = _qlvalue->toString();
-	if( _rvalue != nullptr )
-		rval = _rvalue->toString();
-	else if( _qrvalue != nullptr )
-		rval = _qrvalue->toString();
-
-	return "FN 2 : " + _q.toString() + " = " + lval + " + " + rval;
+	return std::to_string( row ) + " FN 2 : " + _q.toString() + " = " + _lvalue->toString() + " + " + _rvalue->toString();
 }
 
 } /* namespace TNC150 */

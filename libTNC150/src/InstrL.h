@@ -22,17 +22,25 @@ class InstrL : public AbstractInstruction
 {
 	public:
 		InstrL( const uint8_t mFunction );
+		InstrL( const uint8_t mFunction, const uint16_t feed );
 		InstrL( const Axis axis );
+		InstrL( const Axis axis, const uint16_t feed );
 		InstrL( const Axis axis, const uint8_t mFunction );
+		InstrL( const Axis axis, const uint8_t mFunction, const uint16_t feed );
 		InstrL( const Axis axis1, const Axis axis2 );
+		InstrL( const Axis axis1, const Axis axis2, const uint16_t feed );
 		InstrL( const Axis axis1, const Axis axis2, const uint8_t mFunction );
+		InstrL( const Axis axis1, const Axis axis2, const uint8_t mFunction, const uint16_t feed );
 		InstrL( const Axis axis1, const Axis axis2, const Axis axis3 );
+		InstrL( const Axis axis1, const Axis axis2, const Axis axis3, const uint16_t feed );
 		InstrL( const Axis axis1, const Axis axis2, const Axis axis3, const uint8_t mFunction );
+		InstrL( const Axis axis1, const Axis axis2, const Axis axis3, const uint8_t mFunction, const uint16_t feed );
 		InstrL( const InstrL &other );
 		~InstrL();
 		std::string toString( const uint16_t row );
 		unsigned int rowCount();
 		bool isValid();
+		void setFeed( uint16_t f );
 
 	private:
 		std::unique_ptr<Axis> _axis1;

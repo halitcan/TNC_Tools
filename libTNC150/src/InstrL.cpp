@@ -14,7 +14,15 @@ InstrL::InstrL( const uint8_t mFunction ) : _m_func{ mFunction }
 {
 }
 
+InstrL::InstrL( const uint8_t mFunction, const uint16_t feed ) : _m_func{ mFunction }, _feed{ feed }
+{
+}
+
 InstrL::InstrL( const Axis axis ) : _axis1{ new Axis{ axis } }
+{
+}
+
+InstrL::InstrL( const Axis axis, const uint16_t feed ) : _axis1{ new Axis{ axis } }, _feed{ feed }
 {
 }
 
@@ -22,7 +30,15 @@ InstrL::InstrL( const Axis axis, const uint8_t mFunction ) : _axis1{ new Axis{ a
 {
 }
 
+InstrL::InstrL( const Axis axis, const uint8_t mFunction, const uint16_t feed ) : _axis1{ new Axis{ axis } }, _m_func{ mFunction }, _feed{ feed }
+{
+}
+
 InstrL::InstrL( const Axis axis1, const Axis axis2 ) : _axis1{ new Axis{ axis1 } }, _axis2{ new Axis{ axis2 } }
+{
+}
+
+InstrL::InstrL( const Axis axis1, const Axis axis2, const uint16_t feed ) : _axis1{ new Axis{ axis1 } }, _axis2{ new Axis{ axis2 } }, _feed{ feed }
 {
 }
 
@@ -31,14 +47,30 @@ InstrL::InstrL( const Axis axis1, const Axis axis2, const uint8_t mFunction )
 {
 }
 
+InstrL::InstrL( const Axis axis1, const Axis axis2, const uint8_t mFunction, const uint16_t feed )
+	   : _axis1{ new Axis{ axis1 } }, _axis2{ new Axis{ axis2 } }, _m_func{ mFunction }, _feed{ feed }
+{
+}
+
 InstrL::InstrL( const Axis axis1, const Axis axis2, const Axis axis3 )
 	   : _axis1{ new Axis{ axis1 } }, _axis2{ new Axis{ axis2 } }, _axis3{ new Axis{ axis3 } }
+{
+}
+
+InstrL::InstrL( const Axis axis1, const Axis axis2, const Axis axis3, const uint16_t feed )
+	   : _axis1{ new Axis{ axis1 } }, _axis2{ new Axis{ axis2 } }, _axis3{ new Axis{ axis3 } }, _feed{ feed }
 {
 }
 
 InstrL::InstrL( const Axis axis1, const Axis axis2, const Axis axis3, const uint8_t mFunction )
 	   : _axis1{ new Axis{ axis1 } }, _axis2{ new Axis{ axis2 } }, _axis3{ new Axis{ axis3 } },
 	     _m_func{ mFunction }
+{
+}
+
+InstrL::InstrL( const Axis axis1, const Axis axis2, const Axis axis3, const uint8_t mFunction, const uint16_t feed )
+	   : _axis1{ new Axis{ axis1 } }, _axis2{ new Axis{ axis2 } }, _axis3{ new Axis{ axis3 } },
+	     _m_func{ mFunction }, _feed{ feed }
 {
 }
 
@@ -71,6 +103,11 @@ bool InstrL::isValid()
 		return false;
 
 	return true;
+}
+
+void InstrL::setFeed( uint16_t f )
+{
+	_feed.setValue( f );
 }
 
 std::string InstrL::axis1String()

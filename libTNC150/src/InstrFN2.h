@@ -19,18 +19,16 @@ class InstrFN2 : public AbstractInstruction
 {
 	public:
 		InstrFN2( uint8_t q, float lvalue, float rvalue );
-		InstrFN2( uint8_t q, uint8_t lQvalue, uint8_t rQvalue );
-		InstrFN2( uint8_t q, float lvalue, uint8_t rQvalue );
-		InstrFN2( uint8_t q, uint8_t lQvalue, float rvalue );
+		InstrFN2( uint8_t q, uint8_t lQvalue, Field<float>::Dir ldir, uint8_t rQvalue, Field<float>::Dir rdir );
+		InstrFN2( uint8_t q, float lvalue, uint8_t rQvalue, Field<float>::Dir rdir );
+		InstrFN2( uint8_t q, uint8_t lQvalue, Field<float>::Dir ldir, float rvalue );
 		virtual ~InstrFN2();
 		std::string toString( uint16_t row );
 
 	private:
 		Field<uint8_t> _q;
 		std::unique_ptr<Field<float>> _lvalue;
-		std::unique_ptr<Field<uint8_t>> _qlvalue;
 		std::unique_ptr<Field<float>> _rvalue;
-		std::unique_ptr<Field<uint8_t>> _qrvalue;
 };
 
 } /* namespace TNC150 */

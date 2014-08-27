@@ -16,6 +16,7 @@ namespace TNC150
 
 Axis::Axis() : _name{ Name::X }, _inc{ false }
 {
+	setLabel( axisName() );
 }
 
 Axis::Axis( const Name name, const float value ) : _name{ name }, _inc{ false }
@@ -34,12 +35,21 @@ Axis::Axis( const Axis &other ) : Field{ other }, _name{ other._name }, _inc{ ot
 {
 }
 
-Axis::Axis( const Name name, const uint8_t q, const Dir qdir ) : Field{ q, qdir }, _name{ name }
+Axis::Axis( const Name name, const uint8_t q, const Dir qdir ) : Field{ q, qdir }, _name{ name }, _inc{ false }
 {
 	setLabel( axisName() );
 }
 Axis::~Axis() { }
 
+Axis::Name Axis::name()
+{
+	return _name;
+}
+
+bool Axis::isIncremental()
+{
+	return _inc;
+}
 
 std::string Axis::axisName()
 {
@@ -63,6 +73,7 @@ std::string Axis::axisName()
 			ret.push_back( 'V' );
 			break;
 		default:
+			throw NameError();
 			break;
 	}
 
@@ -70,3 +81,4 @@ std::string Axis::axisName()
 }
 
 } /* namespace TNC150 */
+

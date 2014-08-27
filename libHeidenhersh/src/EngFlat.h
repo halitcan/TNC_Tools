@@ -16,12 +16,13 @@ namespace heidenhersh
 class EngFlat : public Engrave
 {
 	public:
-		EngFlat( std::vector<hersh::Glyph> &glyphs );
+		EngFlat( std::vector<hersh::Glyph> &glyphs, const uint16_t feed );
 		virtual ~EngFlat();
-		Engrave::LinearVector makeLinear( float scale, float spacing );
-		Engrave::RotaryVector makeRotary( float wheelDia, float scale );
+		ProgramVector makeLinear( float spacing );
+		Engrave::RotaryVector makeRotary( float spacing, float dia );
 
 	private:
+		EngFlat();
 };
 
 } /* namespace heidenhersh */

@@ -47,7 +47,7 @@ std::string InstrFN4::toString( uint16_t row )
 	else if( _qrvalue != nullptr )
 		rval = _qrvalue->toString();
 
-	return "FN 3 : " + _q.toString() + " = " + lval + " DIV " + rval;
+	return std::to_string( row ) + " FN 3 : " + _q.toString() + " = " + lval + " DIV " + rval;
 }
 
 } /* namespace TNC150 */

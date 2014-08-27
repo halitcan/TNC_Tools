@@ -10,7 +10,7 @@
 
 #include <vector>
 #include "Vertex.h"
-
+#include <cstddef>
 
 namespace hersh
 {
@@ -33,6 +33,8 @@ class Glyph
 		float getLPos();
 		float getRPos();
 		void mirror( const bool mirror_x, const bool mirror_y );
+		float getWidth();
+		size_t size();
 
 	private:
 		int glyphnum;

@@ -18,12 +18,12 @@ Field<F>::Field() : _qdir{ Dir::Positive }
 }
 
 template<class F>
-Field<F>::Field( std::string label ) : _label{ label }, _qdir{ Dir::Positive }
+Field<F>::Field( const std::string label ) : _label{ label }, _qdir{ Dir::Positive }
 {
 }
 
 template<class F>
-Field<F>::Field( std::string label, F value ) : _label{ label }, _value{ new F{ value } }, _qdir{ Dir::Positive }
+Field<F>::Field( const std::string label, const F value ) : _label{ label }, _value{ new F{ value } }, _qdir{ Dir::Positive }
 {
 }
 
@@ -37,12 +37,12 @@ Field<F>::Field( const Field &other ) : _label{ other._label }, _qdir{ other._qd
 }
 
 template<class F>
-Field<F>::Field( std::string label, uint8_t q, Dir dir ) : _label{ label }, _q{ new uint8_t{ q } }, _qdir{ dir }
+Field<F>::Field( const std::string label, const uint8_t q, const Dir dir ) : _label{ label }, _q{ new uint8_t{ q } }, _qdir{ dir }
 {
 }
 
 template<class F>
-Field<F>::Field( uint8_t q, Dir dir ) : _q{ new uint8_t{ q } }, _qdir{ dir }
+Field<F>::Field( const uint8_t q, const Dir dir ) : _q{ new uint8_t{ q } }, _qdir{ dir }
 {
 }
 
@@ -77,9 +77,9 @@ template<>
 std::string Field<float>::toString()
 {
 	if( _q != nullptr )
-		return qString();
+		return _label + qString();
 	std::stringstream ret;
-//	ret << _label;
+	ret << _label;
 
 	if( _value != nullptr )
 		ret << std::setprecision( 3 ) << std::fixed << std::showpos << *_value;
@@ -134,6 +134,12 @@ template<class F>
 std::string Field<F>::label()
 {
 	return _label;
+}
+
+template<class F>
+bool Field<F>::hasValue()
+{
+	return _value != nullptr;
 }
 
 template<class F>

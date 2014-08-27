@@ -17,8 +17,10 @@ class Feed : public Field<uint16_t>
 {
 	public:
 		Feed();
-		Feed( uint16_t value );
+		Feed( const uint16_t value );
 		~Feed();
+	private:
+		using Field<uint16_t>::setLabel;
 };
 
 } /* namespace TNC150 */

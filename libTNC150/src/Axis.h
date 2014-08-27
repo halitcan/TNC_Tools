@@ -17,6 +17,7 @@ class Axis : public Field<float>
 {
 	public:
 		enum class Name{ X, Y, Z, IV };
+		enum class NameError{ };
 		Axis( const Name name, const float value );
 		Axis( const Name name, const float value, const bool incremental );
 		Axis( const Name name, const uint8_t q, const Dir qdir );
@@ -30,6 +31,7 @@ class Axis : public Field<float>
 		Name _name;
 		bool _inc;
 		std::string axisName();
+		using Field<float>::setLabel;
 };
 
 } /* namespace TNC150 */

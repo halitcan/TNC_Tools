@@ -14,7 +14,7 @@ Feed::Feed() : Field<uint16_t>{ "F" }
 {
 }
 
-Feed::Feed( uint16_t value ) : Field<uint16_t>{ "F" }
+Feed::Feed( const uint16_t value ) : Field<uint16_t>{ "F" }
 {
 	setValue( value );
 }

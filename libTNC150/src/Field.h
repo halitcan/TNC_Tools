@@ -20,17 +20,18 @@ class Field
 	public:
 		enum class Dir{ Positive, Negative };
 		Field();
-		Field( std::string label );
-		Field( std::string label, F value );
+		Field( const std::string label );
+		Field( const std::string label, const F value );
 		Field( const Field &other );
-		Field( std::string label, uint8_t q, Dir dir );
-		Field( uint8_t q, Dir dir );
+		Field( const std::string label, const uint8_t q, const Dir dir );
+		Field( const uint8_t q, const Dir dir );
 		~Field();
 		std::string toString();
 		void setValue( const F value );
 		void setLabel( const std::string label );
 		F value();
 		std::string label();
+		bool hasValue();
 
 	private:
 		std::string _label;

@@ -119,4 +119,18 @@ void Glyph::mirror( const bool mirror_x, const bool mirror_y )
 		}
 }
 
+float Glyph::getWidth()
+{
+	return rpos + (lpos * -1);
+}
+
+size_t Glyph::size()
+{
+	size_t ret = 0;
+	for( auto p : paths )
+		ret += p.size();
+
+	return ret;
+}
+
 } //namespace Hersh

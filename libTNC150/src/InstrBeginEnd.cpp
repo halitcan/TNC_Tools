@@ -30,7 +30,7 @@ std::string InstrBeginEnd::toString( const uint16_t row )
 	std::string be = _be == BeginEnd::Begin ? "BEGIN " : "END ";
 	std::string u = _unit == Units::MM ? "MM" : "INCH";
 
-	return be + _pgm_no.toString() + ' ' + u;
+	return std::to_string( row ) + ' ' + be + _pgm_no.toString() + ' ' + u;
 }
 
 unsigned int InstrBeginEnd::rowCount()
