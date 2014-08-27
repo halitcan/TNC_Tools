@@ -37,7 +37,10 @@ std::string Program::toString()
 
 	int row = 0;
 	for( auto &i : _instructions )
-		ret += (i->toString( row++ ) + '\n');
+	{
+		ret += (i->toString( row ) + '\n');
+		row += i->rowCount();
+	}
 
 	return ret;
 }

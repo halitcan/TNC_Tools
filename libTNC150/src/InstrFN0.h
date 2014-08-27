@@ -18,8 +18,11 @@ class InstrFN0 : public AbstractInstruction
 {
 	public:
 		InstrFN0( uint8_t q, float value );
+		InstrFN0( uint8_t q, uint8_t rvalue, Field<float>::Dir rdir );
 		virtual ~InstrFN0();
 		std::string toString( uint16_t row );
+		unsigned int rowCount();
+		bool isValid();
 
 	private:
 		Field<uint8_t> _q;

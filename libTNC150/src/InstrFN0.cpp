@@ -14,6 +14,10 @@ InstrFN0::InstrFN0( uint8_t q, float value ) : _q{ "Q", q }, _value{ "", value }
 {
 }
 
+InstrFN0::InstrFN0( uint8_t q, uint8_t rvalue, Field<float>::Dir rdir ) : _q{ "Q", q }, _value{ "", rvalue, rdir }
+{
+}
+
 InstrFN0::~InstrFN0()
 {
 }
@@ -24,3 +28,13 @@ std::string InstrFN0::toString( uint16_t row )
 }
 
 } /* namespace TNC150 */
+
+unsigned int TNC150::InstrFN0::rowCount()
+{
+	return 1;
+}
+
+bool TNC150::InstrFN0::isValid()
+{
+	return true;
+}

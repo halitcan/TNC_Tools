@@ -16,7 +16,7 @@ namespace heidenhersh
 class EngFlat : public Engrave
 {
 	public:
-		EngFlat( hersh::GlyphSet &glyphs, const uint16_t feed );
+		EngFlat( hersh::GlyphSet &glyphs, const uint16_t feed, float zsafe, float zfinish, uint8_t n_cuts );
 		virtual ~EngFlat();
 		ProgramVector makeLinear( float spacing );
 		Engrave::RotaryVector makeRotary( float spacing, float dia );
@@ -25,6 +25,9 @@ class EngFlat : public Engrave
 
 	private:
 		EngFlat();
+		float _zsafe;
+		float _zfinish;
+		uint8_t _n_cuts;
 };
 
 } /* namespace heidenhersh */
