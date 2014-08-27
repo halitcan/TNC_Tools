@@ -21,8 +21,7 @@ class Engrave
 {
 	public:
 		typedef std::vector<TNC150::InstrL> LinearVector;
-		typedef std::pair<TNC150::InstrL, float> RotaryEntry;
-		typedef std::vector<RotaryEntry> RotaryVector;
+		typedef std::pair<std::vector<TNC150::Program>, std::vector<float>> RotaryVector;
 		typedef std::vector<TNC150::Program> ProgramVector;
 
 		Engrave( uint16_t feed );

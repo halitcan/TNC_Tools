@@ -10,7 +10,10 @@
 #include <TNC150/InstrLabelSet.h>
 #include <TNC150/InstrFN11.h>
 #include <TNC150/InstrFN2.h>
+#include <TNC150/InstrStop.h>
 #include <cmath>
+
+#include <iostream>
 
 namespace heidenhersh
 {
@@ -77,25 +80,58 @@ Engrave::ProgramVector EngFlat::makeLinear( float spacing )
 
 Engrave::RotaryVector EngFlat::makeRotary( float spacing, float dia )
 {
-	Engrave::RotaryVector ret;
+	ProgramVector pgm_ret;
+	std::vector<float> angle_ret;
 
 	if( _glyphs == nullptr )
-		return ret;
+		return RotaryVector{ pgm_ret, angle_ret };
 
 	float angle = 0.0f;
+	uint8_t pgm_no = 1;
+	uint8_t lblNo = 0;
+	pgm_ret.push_back( TNC150::Program( pgm_no++ ) );
+
+	pgm_ret.back().insert( std::make_shared<TNC150::InstrFN0>( 0, _zsafe ) );
 
 	for( auto g = _glyphs->begin(); g != _glyphs->end(); g++ )
 	{
+		//Calculate angle
 		if( g != _glyphs->begin() )
-			angle += 360.0f / (g->getWidth() / (dia * M_PI));
+		{
+			float dist = (g - 1)->getWidth() + spacing;
+			angle += (360 * (dist / (dia * M_PI)));
 
-//		Engrave::LinearVector l = glyph2l( *g );
-//		for( auto i : l )
-//			ret.push_back( EngraveRotaryEntry{ i, angle } );
+			if( g->size() != 0 )	//Skip whitespace
+			{
+				angle_ret.push_back( angle );
+				pgm_ret.back().insert( std::make_shared<TNC150::InstrStop>() );
+			}
+		}
+
+		if( pgm_ret.back().size() + g->size() > 980 )
+		{
+			pgm_ret.back().insert( std::make_shared<TNC150::InstrL>( TNC150::Axis( TNC150::Axis::Name::Z, _zsafe ), 2, 6000 ) );
+			pgm_ret.push_back( TNC150::Program( pgm_no++ ) );
+			pgm_ret.back().insert( std::make_shared<TNC150::InstrFN0>( 0, _zsafe ) );
+			lblNo = 0;
+		}
+
+		Engrave::LinearVector l = glyph2l( *g );
+
+		pgm_ret.back().insert( std::make_shared<TNC150::InstrFN0>( 1, 0.0f ) );
+		pgm_ret.back().insert( std::make_shared<TNC150::InstrLabelSet>( lblNo ) );
+		pgm_ret.back().insert( std::make_shared<TNC150::InstrFN2>( 1, 1, TNC150::Field<float>::Dir::Positive, _zfinish / _n_cuts ) );
+
+		for( auto i : l )
+			pgm_ret.back().insert( std::make_shared<TNC150::InstrL>( i ) );
+
+		pgm_ret.back().insert( std::make_shared<TNC150::InstrFN11>( 1, _zfinish, lblNo ) );
+		lblNo++;
 	}
 
+	pgm_ret.back().insert( std::make_shared<TNC150::InstrL>( TNC150::Axis( TNC150::Axis::Name::Z, _zsafe ), 2, 6000 ) );
 
-	return ret;
+	return RotaryVector{ pgm_ret, angle_ret };
 }
 
 void EngFlat::scale( const float s )
