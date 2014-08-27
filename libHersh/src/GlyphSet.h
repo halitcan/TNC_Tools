@@ -25,6 +25,7 @@ class GlyphSet
 		void scale( const float s );
 		void mirror( const bool mirror_x, const bool mirror_y );
 		size_t size();
+		void clear();
 
 	private:
 		std::vector<Glyph> _glyphs;

@@ -52,4 +52,9 @@ size_t GlyphSet::size()
 	return _glyphs.size();
 }
 
+void GlyphSet::clear()
+{
+	_glyphs.clear();
+}
+
 } /* namespace hersh */

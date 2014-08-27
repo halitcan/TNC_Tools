@@ -14,7 +14,7 @@ Engrave::Engrave( uint16_t feed ) : _glyphs{ nullptr }, _wfeed{ feed }, _ffeed{ 
 {
 }
 
-Engrave::Engrave( hersh::Glyph::GlyphVector &glyphs, uint16_t feed ) : _glyphs{ &glyphs }, _wfeed{ feed }, _ffeed{ 6000 }
+Engrave::Engrave( hersh::GlyphSet &glyphs, uint16_t feed ) : _glyphs{ &glyphs }, _wfeed{ feed }, _ffeed{ 6000 }
 {
 }
 

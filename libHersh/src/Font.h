@@ -10,7 +10,7 @@
 
 #include <string>
 #include <vector>
-#include "Glyph.h"
+#include "GlyphSet.h"
 #include "Vertex.h"
 #include "FontMap.h"
 
@@ -31,10 +31,10 @@ class Font
 		virtual ~Font();
 		void load( std::string filename );
 		Glyph getGlyph( wchar_t g, FontMap &map );
-		Glyph::GlyphVector getGlyphs( std::wstring s, FontMap &m );
+		GlyphSet getGlyphs( std::wstring s, FontMap &m );
 
 	private:
-		std::vector<Glyph> glyphs;
+		GlyphSet glyphs;
 		void parse_glyphs( std::vector<std::string> &rows );
 		Glyph parse_glyph( std::string &line );
 		std::vector<std::vector<Vertex>> parse_paths( std::string &line );

@@ -9,7 +9,7 @@
 #define ENGRAVE_H_
 
 #include <vector>
-#include <Hersh/Glyph.h>
+#include <Hersh/GlyphSet.h>
 #include <TNC150/InstrL.h>
 #include <TNC150/Program.h>
 
@@ -26,13 +26,13 @@ class Engrave
 		typedef std::vector<TNC150::Program> ProgramVector;
 
 		Engrave( uint16_t feed );
-		Engrave( hersh::Glyph::GlyphVector &glyphs, uint16_t feed );
+		Engrave( hersh::GlyphSet &glyphs, uint16_t feed );
 		virtual ~Engrave();
 		virtual ProgramVector makeLinear( float spacing ) = 0;
 		virtual RotaryVector makeRotary( float spacing, float dia ) = 0;
 
 	protected:
-		std::vector<hersh::Glyph> *_glyphs;
+		hersh::GlyphSet *_glyphs;
 		LinearVector glyph2l( hersh::Glyph g );
 		uint16_t _wfeed;
 		uint16_t _ffeed;

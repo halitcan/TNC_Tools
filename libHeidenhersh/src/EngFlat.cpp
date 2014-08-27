@@ -11,7 +11,7 @@
 namespace heidenhersh
 {
 
-EngFlat::EngFlat( std::vector<hersh::Glyph> &glyphs, const uint16_t feed ) : Engrave{ glyphs, feed }
+EngFlat::EngFlat( hersh::GlyphSet &glyphs, const uint16_t feed ) : Engrave{ glyphs, feed }
 {
 }
 
@@ -75,4 +75,21 @@ Engrave::RotaryVector EngFlat::makeRotary( float spacing, float dia )
 	return ret;
 }
 
+void EngFlat::scale( const float s )
+{
+	if( _glyphs == nullptr )
+		return;
+
+	_glyphs->scale( s );
+}
+
+void EngFlat::mirror( const bool mirror_x, const bool mirror_y )
+{
+	if( _glyphs == nullptr )
+		return;
+
+	_glyphs->mirror( mirror_x, mirror_y );
+}
+
 } /* namespace heidenhersh */
+

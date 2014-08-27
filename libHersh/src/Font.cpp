@@ -118,9 +118,9 @@ Glyph Font::getGlyph( wchar_t g, FontMap &map )
 	return Glyph();
 }
 
-Glyph::GlyphVector Font::getGlyphs( std::wstring s, FontMap& m )
+GlyphSet Font::getGlyphs( std::wstring s, FontMap& m )
 {
-	std::vector<Glyph> ret;
+	GlyphSet ret;
 	for( auto c : s )
 		ret.push_back( getGlyph( c, m ) );
 
