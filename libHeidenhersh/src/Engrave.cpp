@@ -10,15 +10,17 @@
 namespace heidenhersh
 {
 
-Engrave::Engrave( uint16_t feed ) : _glyphs{ nullptr }, _wfeed{ feed }, _ffeed{ 6000 }
+Engrave::Engrave( hersh::GlyphSet &glyphs, uint16_t feed, float zsafe )
+		: _glyphs{ &glyphs }, _wfeed{ feed }, _ffeed{ 6000 }, _zsafe{ zsafe }, _n_cuts{ 1 }, _spacing{ 0.0f }
 {
 }
 
-Engrave::Engrave( hersh::GlyphSet &glyphs, uint16_t feed ) : _glyphs{ &glyphs }, _wfeed{ feed }, _ffeed{ 6000 }
+Engrave::Engrave( hersh::GlyphSet &glyphs, uint16_t feed, float zsafe, uint8_t n_cuts )
+						: _glyphs{ &glyphs }, _wfeed{ feed }, _ffeed{ 6000 }, _zsafe{ zsafe }, _n_cuts{ n_cuts }, _spacing{ 0.0f }
 {
 }
 
-Engrave::Engrave() : _glyphs{ nullptr }, _wfeed{ 30 }, _ffeed{ 6000 }
+Engrave::Engrave() : _glyphs{ nullptr }, _wfeed{ 30 }, _ffeed{ 6000 }, _zsafe{ 0.2f }, _n_cuts{ 1 }, _spacing{ 0.0f }
 {
 }
 
@@ -48,6 +50,21 @@ Engrave::LinearVector Engrave::glyph2l( hersh::Glyph g )
 	}
 
 	return ret;
+}
+
+void Engrave::setNCuts( const uint8_t value )
+{
+	_n_cuts = value;
+}
+
+void Engrave::setSpacing( const float value )
+{
+	_spacing = value;
+}
+
+void Engrave::setFastFeed( const uint16_t value )
+{
+	_ffeed = value;
 }
 
 } /* namespace heidenhersh */

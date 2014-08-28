@@ -18,12 +18,12 @@
 namespace heidenhersh
 {
 
-EngFlat::EngFlat( hersh::GlyphSet &glyphs, const uint16_t feed, float zsafe, float zfinish, uint8_t n_cuts )
-	    : Engrave{ glyphs, feed }, _zsafe{ zsafe }, _zfinish{ zfinish }, _n_cuts{ n_cuts }
+EngFlat::EngFlat( hersh::GlyphSet &glyphs, const uint16_t feed, float zsafe, float zfinish )
+	    : Engrave{ glyphs, feed, zsafe }, _zfinish{ zfinish }
 {
 }
 
-EngFlat::EngFlat() : _zsafe{ 0.2f }, _zfinish{ -0.3f }, _n_cuts{ 2 }
+EngFlat::EngFlat() : _zfinish{ -0.3f }
 {
 }
 
@@ -31,7 +31,7 @@ EngFlat::~EngFlat()
 {
 }
 
-Engrave::ProgramVector EngFlat::makeLinear( float spacing )
+Engrave::ProgramVector EngFlat::makeLinear()
 {
 	ProgramVector ret;
 
@@ -56,9 +56,11 @@ Engrave::ProgramVector EngFlat::makeLinear( float spacing )
 		}
 
 		if( g != _glyphs->begin() )
+		{
+			trans = (g - 1)->getRPos() + (g->getLPos() * -1) + _spacing;
 			g->translate( trans, 0.0f );
+		}
 
-		trans = g->getRPos() + spacing;
 
 		Engrave::LinearVector l = glyph2l( *g );
 
@@ -78,7 +80,7 @@ Engrave::ProgramVector EngFlat::makeLinear( float spacing )
 	return ret;
 }
 
-Engrave::RotaryVector EngFlat::makeRotary( float spacing, float dia )
+Engrave::RotaryVector EngFlat::makeRotary( float dia )
 {
 	ProgramVector pgm_ret;
 	std::vector<float> angle_ret;
@@ -98,7 +100,7 @@ Engrave::RotaryVector EngFlat::makeRotary( float spacing, float dia )
 		//Calculate angle
 		if( g != _glyphs->begin() )
 		{
-			float dist = (g - 1)->getWidth() + spacing;
+			float dist = (g - 1)->getRPos() + (g->getLPos() * -1) + _spacing;
 			angle += (360 * (dist / (dia * M_PI)));
 
 			if( g->size() != 0 )	//Skip whitespace
