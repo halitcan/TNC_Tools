@@ -45,6 +45,7 @@ Engrave::ProgramVector EngFlat::makeLinear()
 
 	ret.back().insert( std::make_shared<TNC150::InstrFN0>( 0, _zsafe ) );
 
+
 	for( auto g = _glyphs->begin(); g != _glyphs->end(); g++ )
 	{
 		if( ret.back().size() + g->size() > 980 )

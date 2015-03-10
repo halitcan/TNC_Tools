@@ -4,7 +4,7 @@ LIBNAME		:= Heidenhersh
 SRCDIR 		:= src
 BUILDDIR 	:= build
 CFLAGS 		:= -g -Wall -fPIC -std=c++11 -I../include/
-LIBS 		= -L/home/john/dev/Heidenhersh_workspace/lib -lpthread -lHersh -lTNC150
+LIBS 		= -L../lib -lpthread -lHersh -lTNC150
 TARGET 		:= lib$(LIBNAME).so
 LDFLAGS 	:= -shared -Wl,-soname=$(TARGET) -g
 
@@ -16,11 +16,11 @@ DEPS 		:= $(OBJECTS:.o=.deps)
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	-@mkdir ../lib/
+	@mkdir -p ../lib/
 	@echo " Linking..."; $(CC) $(LDFLAGS) $^ -o ../lib/$(TARGET) $(LIBS)
-	-@mkdir ../include/ 2> /dev/null
-	-@mkdir ../include/$(LIBNAME) 2> /dev/null
-	-@cp -f src/*.h ../include/$(LIBNAME)/ 
+	@mkdir -p ../include/ 2> /dev/null
+	@mkdir -p ../include/$(LIBNAME) 2> /dev/null
+	@cp -f src/*.h ../include/$(LIBNAME)/ 
 	
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)

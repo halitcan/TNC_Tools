@@ -25,15 +25,6 @@ void GlyphSet::push_back( const Glyph g )
 	_glyphs.push_back( g );
 }
 
-std::vector<Glyph>::iterator GlyphSet::begin()
-{
-	return _glyphs.begin();
-}
-
-std::vector<Glyph>::iterator GlyphSet::end()
-{
-	return _glyphs.end();
-}
 
 void GlyphSet::scale( const float s )
 {
@@ -55,6 +46,16 @@ size_t GlyphSet::size()
 void GlyphSet::clear()
 {
 	_glyphs.clear();
+}
+
+std::vector<Glyph>::iterator GlyphSet::begin()
+{
+	return _glyphs.begin();
+}
+
+std::vector<Glyph>::iterator GlyphSet::end()
+{
+	return _glyphs.end();
 }
 
 } /* namespace hersh */

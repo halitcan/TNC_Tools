@@ -13,7 +13,13 @@
 /libTNC150/.cproject
 /libTNC150/.project
 /libTNC150/.settings/
+/libHersh/.settings/
 /heidenhershTest
 /libHeidenhersh/.cproject
 /libHeidenhersh/.project
 /libHeidenhersh/.settings
+/Heidenhersh/src/gitversion.cpp
+/Heidenhersh/.cproject
+/Heidenhersh/.project
+/Heidenhersh/.settings
+/Heidenhersh/*.o
