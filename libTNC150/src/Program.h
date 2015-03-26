@@ -25,6 +25,7 @@ class Program
 		void insert( ProgramEntry i );
 		std::string toString();
 		size_t size();
+		uint16_t pgm_no();
 
 	private:
 		std::vector<std::shared_ptr<AbstractInstruction>> _instructions;

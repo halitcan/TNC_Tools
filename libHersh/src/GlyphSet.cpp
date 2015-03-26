@@ -17,7 +17,6 @@ GlyphSet::GlyphSet()
 
 GlyphSet::~GlyphSet()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void GlyphSet::push_back( const Glyph g )

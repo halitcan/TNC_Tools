@@ -50,6 +50,11 @@ size_t Program::size()
 	return _instructions.size();
 }
 
+uint16_t Program::pgm_no()
+{
+	return _pgm_no;
+}
+
 void Program::makeBegEnd()
 {
 	_instructions.clear();
