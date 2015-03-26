@@ -17,11 +17,10 @@ class EngFlat : public Engrave
 {
 	public:
 		EngFlat( hersh::GlyphSet &glyphs, const uint16_t feed, float zsafe, float zfinish );
+		EngFlat( hersh::GlyphSet &glyphs, const uint16_t feed, float zsafe, float zfinish, uint8_t n_cuts );
 		virtual ~EngFlat();
 		ProgramVector makeLinear();
 		Engrave::RotaryVector makeRotary( float dia );
-		void scale( const float s );
-		void mirror( const bool mirror_x, const bool mirror_y );
 
 	private:
 		EngFlat();

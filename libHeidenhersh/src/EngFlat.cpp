@@ -11,6 +11,7 @@
 #include <TNC150/InstrFN11.h>
 #include <TNC150/InstrFN2.h>
 #include <TNC150/InstrStop.h>
+#include <TNC150/TNC150.h>
 #include <cmath>
 
 #include <iostream>
@@ -20,6 +21,11 @@ namespace heidenhersh
 
 EngFlat::EngFlat( hersh::GlyphSet &glyphs, const uint16_t feed, float zsafe, float zfinish )
 	    : Engrave{ glyphs, feed, zsafe }, _zfinish{ zfinish }
+{
+}
+
+EngFlat::EngFlat( hersh::GlyphSet &glyphs, const uint16_t feed, float zsafe, float zfinish, uint8_t n_cuts )
+	    : Engrave{ glyphs, feed, zsafe, n_cuts }, _zfinish{ zfinish }
 {
 }
 
@@ -48,9 +54,9 @@ Engrave::ProgramVector EngFlat::makeLinear()
 
 	for( auto g = _glyphs->begin(); g != _glyphs->end(); g++ )
 	{
-		if( ret.back().size() + g->size() > 980 )
+		if( ret.back().size() + g->size() > tnc150_max_pgm_rows )
 		{
-			ret.back().insert( std::make_shared<TNC150::InstrL>( TNC150::Axis( TNC150::Axis::Name::Z, _zsafe ), 2, 6000 ) );
+			ret.back().insert( std::make_shared<TNC150::InstrL>( TNC150::Axis( TNC150::Axis::Name::Z, _zsafe ), 2, tnc150_rapid_feed ) );
 			ret.push_back( TNC150::Program( pgm_no++ ) );
 			ret.back().insert( std::make_shared<TNC150::InstrFN0>( 0, _zsafe ) );
 			lblNo = 0;
@@ -111,9 +117,9 @@ Engrave::RotaryVector EngFlat::makeRotary( float dia )
 			}
 		}
 
-		if( pgm_ret.back().size() + g->size() > 980 )
+		if( pgm_ret.back().size() + g->size() > tnc150_max_pgm_rows )
 		{
-			pgm_ret.back().insert( std::make_shared<TNC150::InstrL>( TNC150::Axis( TNC150::Axis::Name::Z, _zsafe ), 2, 6000 ) );
+			pgm_ret.back().insert( std::make_shared<TNC150::InstrL>( TNC150::Axis( TNC150::Axis::Name::Z, _zsafe ), 2, tnc150_rapid_feed ) );
 			pgm_ret.push_back( TNC150::Program( pgm_no++ ) );
 			pgm_ret.back().insert( std::make_shared<TNC150::InstrFN0>( 0, _zsafe ) );
 			lblNo = 0;
@@ -132,25 +138,9 @@ Engrave::RotaryVector EngFlat::makeRotary( float dia )
 		lblNo++;
 	}
 
-	pgm_ret.back().insert( std::make_shared<TNC150::InstrL>( TNC150::Axis( TNC150::Axis::Name::Z, _zsafe ), 2, 6000 ) );
+	pgm_ret.back().insert( std::make_shared<TNC150::InstrL>( TNC150::Axis( TNC150::Axis::Name::Z, _zsafe ), 2, tnc150_rapid_feed ) );
 
 	return RotaryVector{ pgm_ret, angle_ret };
-}
-
-void EngFlat::scale( const float s )
-{
-	if( _glyphs == nullptr )
-		return;
-
-	_glyphs->scale( s );
-}
-
-void EngFlat::mirror( const bool mirror_x, const bool mirror_y )
-{
-	if( _glyphs == nullptr )
-		return;
-
-	_glyphs->mirror( mirror_x, mirror_y );
 }
 
 } /* namespace heidenhersh */

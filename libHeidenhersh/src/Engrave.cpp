@@ -67,5 +67,21 @@ void Engrave::setFastFeed( const uint16_t value )
 	_ffeed = value;
 }
 
+void Engrave::scale( float s )
+{
+	if( _glyphs == nullptr )
+		return;
+
+	_glyphs->scale( s );
+}
+
+void Engrave::mirror( bool mirror_x, bool mirror_y )
+{
+	if( _glyphs == nullptr )
+		return;
+
+	_glyphs->mirror( mirror_x, mirror_y );
+}
+
 } /* namespace heidenhersh */
 

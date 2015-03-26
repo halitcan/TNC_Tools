@@ -32,6 +32,8 @@ class Engrave
 		void setNCuts( const uint8_t value );
 		void setSpacing( const float value );
 		void setFastFeed( const uint16_t value );
+		void scale( const float s );
+		void mirror( const bool mirror_x, const bool mirror_y );
 
 	protected:
 		hersh::GlyphSet *_glyphs;

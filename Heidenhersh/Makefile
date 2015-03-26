@@ -2,7 +2,7 @@ CC		:=	g++
 CFLAGS	:= -std=c++11 -Wall -I../include
 LDFLAGS	:= -L../lib -lHeidenhersh -lHersh -lTNC150
 TARGET	:= Heidenhersh
-ALLOBJS	:= main.o gitversion.o
+ALLOBJS	:= gitversion.o main.o 
 
 all: $(TARGET)
 
@@ -14,7 +14,7 @@ main.o : src/main.cpp
 	
 src/gitversion.cpp: ../.git/HEAD ../.git/index
 	echo "#include <string>" > $@
-	echo "extern const std::string gitversion = \"$(shell git rev-parse HEAD)\";" >> $@
+	echo "extern const std::wstring gitversion = L\"$(shell git rev-parse HEAD)\";" >> $@
 	
 gitversion.o: src/gitversion.cpp
 	$(CC) -c src/gitversion.cpp $(CFLAGS)
